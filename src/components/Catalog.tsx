@@ -79,6 +79,12 @@ export default function Catalog() {
                     alt={image.alt}
                     loading="lazy"
                     decoding="async"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (target.dataset.fallbackApplied) return;
+                      target.dataset.fallbackApplied = "1";
+                      target.src = `https://picsum.photos/seed/${p.id}/200/200`;
+                    }}
                     className="relative h-24 w-24 rounded-full object-cover shadow-[0_14px_28px_-16px_rgba(95,53,41,0.8)] ring-4 ring-white transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110"
                   />
                 </div>
