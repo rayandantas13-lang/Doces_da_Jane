@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { PRODUCT_MAP, formatBRL } from "../data/products";
-import { WHATSAPP_NUMBER } from "../data/contact";
+import { WHATSAPP_NUMBER, whatsappLink } from "../data/contact";
 import { getProductImage } from "../data/productImages";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -75,7 +75,8 @@ export default function CartDrawer() {
       setNameError(true);
       return;
     }
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage())}`;
+    // Usa o helper whatsappLink (com URLSearchParams) que garante encoding UTF-8 correto dos emojis
+    const url = whatsappLink(buildMessage());
     window.open(url, "_blank", "noopener");
   };
 
